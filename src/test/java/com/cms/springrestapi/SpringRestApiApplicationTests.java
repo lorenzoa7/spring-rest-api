@@ -1,4 +1,4 @@
-package com.lorenzoa7.springrestapi.springrestapi;
+package com.cms.springrestapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

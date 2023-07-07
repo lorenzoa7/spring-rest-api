@@ -8,7 +8,7 @@
 		<version>3.1.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.lorenzoa7.springrestapi</groupId>
+	<groupId>com.cms</groupId>
 	<artifactId>spring-rest-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-rest-api</name>

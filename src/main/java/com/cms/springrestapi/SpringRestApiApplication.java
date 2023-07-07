@@ -1,4 +1,4 @@
-package com.lorenzoa7.springrestapi.springrestapi;
+package com.cms.springrestapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
