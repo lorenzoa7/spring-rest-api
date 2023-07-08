@@ -104,4 +104,16 @@ public class EspacoController {
         List<Espaco> espacos = espacoService.obterTodosEspacos();
         return ResponseEntity.ok(espacos);
     }
+
+    // Obter todos os recursos de um espaço específico
+    @GetMapping("/recursos/{id}")
+    public ResponseEntity<List<String>> obterRecursosEspaco(@PathVariable("id") Long id) {
+        Espaco espaco = espacoService.obterEspaco(id);
+        if (espaco != null) {
+            List<String> recursos = espaco.getRecursos();
+            return ResponseEntity.ok(recursos);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
