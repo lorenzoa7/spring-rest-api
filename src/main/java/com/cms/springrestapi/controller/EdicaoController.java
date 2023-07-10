@@ -29,12 +29,14 @@ public class EdicaoController {
         this.edicaoService = edicaoService;
     }
 
+    // Obter todas as edicoes
     @GetMapping
     public ResponseEntity<List<Edicao>> listarEdicoes() {
         List<Edicao> edicoes = edicaoService.listarEdicoes();
         return ResponseEntity.ok(edicoes);
     }
 
+    // Obter detalhes de uma edicao específica
     @GetMapping("/{id}")
     public ResponseEntity<Edicao> obterEdicao(@PathVariable("id") Long id) {
         Edicao edicao = edicaoService.obterEdicao(id);
@@ -45,12 +47,14 @@ public class EdicaoController {
         }
     }
 
+    // Criar uma nova edicao
     @PostMapping
     public ResponseEntity<Edicao> criarEdicao(@RequestBody Edicao edicao) {
         Edicao edicaoCriada = edicaoService.criarEdicao(edicao);
         return ResponseEntity.status(HttpStatus.CREATED).body(edicaoCriada);
     }
 
+    // Atualizar detalhes de uma edicao específica
     @PutMapping("/{id}")
     public ResponseEntity<Edicao> atualizarEdicao(@PathVariable("id") Long id, @RequestBody Edicao edicaoAtualizada) {
         Edicao edicao = edicaoService.obterEdicao(id);
@@ -70,6 +74,7 @@ public class EdicaoController {
         }
     }
 
+    // Atualizar detalhes parciais de uma edicao específica
     @PatchMapping("/{id}")
     public ResponseEntity<Edicao> atualizarCampoEdicao(@PathVariable("id") Long id, @RequestBody Map<String, Object> updates) {
         Edicao edicao = edicaoService.obterEdicao(id);
@@ -86,6 +91,7 @@ public class EdicaoController {
         }
     }
 
+    // Excluir uma edicao específica
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirEdicao(@PathVariable("id") Long id) {
         boolean removido = edicaoService.excluirEdicao(id);

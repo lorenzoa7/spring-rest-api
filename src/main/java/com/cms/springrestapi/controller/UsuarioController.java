@@ -29,12 +29,14 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    // Obter todos os usuarios
     @GetMapping
     public ResponseEntity<List<Usuario>> listarUsuarios() {
         List<Usuario> usuarios = usuarioService.listarUsuarios();
         return ResponseEntity.ok(usuarios);
     }
 
+    // Obter detalhes de um usuario específico
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> obterUsuario(@PathVariable("id") Long id) {
         Usuario usuario = usuarioService.obterUsuario(id);
@@ -45,12 +47,14 @@ public class UsuarioController {
         }
     }
 
+    // Criar um novo usuario
     @PostMapping
     public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario usuario) {
         Usuario usuarioCriado = usuarioService.criarUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioCriado);
     }
 
+    // Atualizar todos os detalhes de um usuario específico
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> atualizarUsuario(@PathVariable("id") Long id, @RequestBody Usuario usuarioAtualizado) {
         Usuario usuario = usuarioService.obterUsuario(id);
@@ -66,6 +70,7 @@ public class UsuarioController {
         }
     }
 
+    // Atualizar detalhes parciais de um usuario específico
     @PatchMapping("/{id}")
     public ResponseEntity<Usuario> atualizarCampoUsuario(@PathVariable("id") Long id, @RequestBody Map<String, Object> updates) {
         Usuario usuario = usuarioService.obterUsuario(id);
@@ -82,6 +87,7 @@ public class UsuarioController {
         }
     }
 
+    // Excluir um usuario específico
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirUsuario(@PathVariable("id") Long id) {
         boolean removido = usuarioService.excluirUsuario(id);

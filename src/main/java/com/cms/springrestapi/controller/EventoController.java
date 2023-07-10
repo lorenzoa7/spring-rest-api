@@ -28,12 +28,14 @@ public class EventoController {
         this.eventoService = eventoService;
     }
 
+    // Obter todos os eventos
     @GetMapping
     public ResponseEntity<List<Evento>> listarEventos() {
         List<Evento> eventos = eventoService.listarEventos();
         return ResponseEntity.ok(eventos);
     }
 
+    // Obter detalhes de um evento específico
     @GetMapping("/{id}")
     public ResponseEntity<Evento> obterEvento(@PathVariable("id") Long id) {
         Evento evento = eventoService.obterEvento(id);
@@ -44,12 +46,14 @@ public class EventoController {
         }
     }
 
+    // Criar um novo espaço
     @PostMapping
     public ResponseEntity<Evento> criarEvento(@RequestBody Evento evento) {
         Evento eventoCriado = eventoService.criarEvento(evento);
         return ResponseEntity.status(HttpStatus.CREATED).body(eventoCriado);
     }
 
+    // Atualizar todos os detalhes de um evento específico
     @PutMapping("/{id}")
     public ResponseEntity<Evento> atualizarEvento(@PathVariable("id") Long id, @RequestBody Evento eventoAtualizado) {
         Evento evento = eventoService.obterEvento(id);
@@ -64,6 +68,7 @@ public class EventoController {
         }
     }
 
+    // Atualizar detalhes parciais de um evento específico
     @PatchMapping("/{id}")
     public ResponseEntity<Evento> atualizarCampoEvento(@PathVariable("id") Long id, @RequestBody Map<String, Object> updates) {
         Evento evento = eventoService.obterEvento(id);
@@ -80,6 +85,7 @@ public class EventoController {
         }
     }
 
+    // Excluir um evento específico
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirEvento(@PathVariable("id") Long id) {
         boolean removido = eventoService.excluirEvento(id);

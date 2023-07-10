@@ -29,11 +29,11 @@ public class EspacoController {
         this.espacoService = espacoService;
     }
 
-    // Criar um novo espaço
-    @PostMapping
-    public ResponseEntity<Espaco> criarEspaco(@RequestBody Espaco espaco) {
-        Espaco novoEspaco = espacoService.criarEspaco(espaco);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoEspaco);
+    // Obter todos os espaços
+    @GetMapping
+    public ResponseEntity<List<Espaco>> obterTodosEspacos() {
+        List<Espaco> espacos = espacoService.obterTodosEspacos();
+        return ResponseEntity.ok(espacos);
     }
 
     // Obter detalhes de um espaço específico
@@ -46,6 +46,14 @@ public class EspacoController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    // Criar um novo espaço
+    @PostMapping
+    public ResponseEntity<Espaco> criarEspaco(@RequestBody Espaco espaco) {
+        Espaco novoEspaco = espacoService.criarEspaco(espaco);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoEspaco);
+    }
+
 
     // Atualizar todos os detalhes de um espaço específico
     @PutMapping("/{id}")
@@ -93,25 +101,6 @@ public class EspacoController {
         if (espaco != null) {
             espacoService.excluirEspaco(id);
             return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    // Obter todos os espaços
-    @GetMapping
-    public ResponseEntity<List<Espaco>> obterTodosEspacos() {
-        List<Espaco> espacos = espacoService.obterTodosEspacos();
-        return ResponseEntity.ok(espacos);
-    }
-
-    // Obter todos os recursos de um espaço específico
-    @GetMapping("/recursos/{id}")
-    public ResponseEntity<List<String>> obterRecursosEspaco(@PathVariable("id") Long id) {
-        Espaco espaco = espacoService.obterEspaco(id);
-        if (espaco != null) {
-            List<String> recursos = espaco.getRecursos();
-            return ResponseEntity.ok(recursos);
         } else {
             return ResponseEntity.notFound().build();
         }

@@ -29,12 +29,14 @@ public class AtividadeController {
         this.atividadeService = atividadeService;
     }
 
+    // Obter todas as atividades
     @GetMapping
     public ResponseEntity<List<Atividade>> listarAtividades() {
         List<Atividade> atividades = atividadeService.listarAtividades();
         return ResponseEntity.ok(atividades);
     }
 
+    // Obter detalhes de uma atividade específica
     @GetMapping("/{id}")
     public ResponseEntity<Atividade> obterAtividade(@PathVariable("id") Long id) {
         Atividade atividade = atividadeService.obterAtividade(id);
@@ -45,12 +47,14 @@ public class AtividadeController {
         }
     }
 
+    // Criar uma nova atividade
     @PostMapping
     public ResponseEntity<Atividade> criarAtividade(@RequestBody Atividade atividade) {
         Atividade atividadeCriada = atividadeService.criarAtividade(atividade);
         return ResponseEntity.status(HttpStatus.CREATED).body(atividadeCriada);
     }
 
+    // Atualizar detalhes de uma atividade específica
     @PutMapping("/{id}")
     public ResponseEntity<Atividade> atualizarAtividade(@PathVariable("id") Long id, @RequestBody Atividade atividadeAtualizada) {
         Atividade atividade = atividadeService.obterAtividade(id);
@@ -69,6 +73,7 @@ public class AtividadeController {
         }
     }
 
+    // Atualizar detalhes parciais de uma atividade específica
     @PatchMapping("/{id}")
     public ResponseEntity<Atividade> atualizarCampoAtividade(@PathVariable("id") Long id, @RequestBody Map<String, Object> updates) {
         Atividade atividade = atividadeService.obterAtividade(id);
@@ -85,6 +90,7 @@ public class AtividadeController {
         }
     }
 
+    // Excluir uma atividade específica
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirAtividade(@PathVariable("id") Long id) {
         boolean removido = atividadeService.excluirAtividade(id);
