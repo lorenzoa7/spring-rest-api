@@ -29,7 +29,7 @@ public class EdicaoController {
         this.edicaoService = edicaoService;
     }
 
-    // Obter todas as edicoes
+    // Obter todas as ediçoes
     @GetMapping
     public ResponseEntity<List<Edicao>> listarEdicoes() {
         List<Edicao> edicoes = edicaoService.listarEdicoes();
