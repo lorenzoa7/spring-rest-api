@@ -19,8 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cms.springrestapi.model.Usuario;
 import com.cms.springrestapi.service.UsuarioService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/usuarios")
+@Tag(name = "usuario-api")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -30,6 +36,13 @@ public class UsuarioController {
     }
 
     // Obter todos os usuarios
+    @Operation(summary = "Busca dados de todos os usuários", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Busca realizada com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "500", description = "Erro ao realizar busca dos dados")
+    })
     @GetMapping
     public ResponseEntity<List<Usuario>> listarUsuarios() {
         List<Usuario> usuarios = usuarioService.listarUsuarios();
@@ -37,6 +50,13 @@ public class UsuarioController {
     }
 
     // Obter detalhes de um usuario específico
+    @Operation(summary = "Busca dados de um usuário específico", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Busca realizada com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "500", description = "Erro ao realizar busca dos dados")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> obterUsuario(@PathVariable("id") Long id) {
         Usuario usuario = usuarioService.obterUsuario(id);
@@ -48,6 +68,13 @@ public class UsuarioController {
     }
 
     // Criar um novo usuario
+    @Operation(summary = "Cria um novo usuário", method = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Uma nova usuário foi criada"),
+            @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "500", description = "Erro ao criar usuário")
+    })
     @PostMapping
     public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario usuario) {
         Usuario usuarioCriado = usuarioService.criarUsuario(usuario);
@@ -55,8 +82,16 @@ public class UsuarioController {
     }
 
     // Atualizar todos os detalhes de um usuario específico
+    @Operation(summary = "Atualiza detalhes de um usuário específico", method = "PUT")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Dados atualizados com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "500", description = "Erro ao atualizar dados")
+    })
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable("id") Long id, @RequestBody Usuario usuarioAtualizado) {
+    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable("id") Long id,
+            @RequestBody Usuario usuarioAtualizado) {
         Usuario usuario = usuarioService.obterUsuario(id);
         if (usuario != null) {
             usuario.setLogin(usuarioAtualizado.getLogin());
@@ -71,8 +106,16 @@ public class UsuarioController {
     }
 
     // Atualizar detalhes parciais de um usuario específico
+    @Operation(summary = "Atualiza detalhes parciais de um usuário específico", method = "PATCH")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Dados atualizados com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "500", description = "Erro ao atualizar dados")
+    })
     @PatchMapping("/{id}")
-    public ResponseEntity<Usuario> atualizarCampoUsuario(@PathVariable("id") Long id, @RequestBody Map<String, Object> updates) {
+    public ResponseEntity<Usuario> atualizarCampoUsuario(@PathVariable("id") Long id,
+            @RequestBody Map<String, Object> updates) {
         Usuario usuario = usuarioService.obterUsuario(id);
         if (usuario != null) {
             ModelMapper modelMapper = new ModelMapper();
@@ -88,6 +131,13 @@ public class UsuarioController {
     }
 
     // Excluir um usuario específico
+    @Operation(summary = "Exclui um usuário", method = "DELETE")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário excluída com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "500", description = "Erro ao excluir usuário")
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirUsuario(@PathVariable("id") Long id) {
         boolean removido = usuarioService.excluirUsuario(id);
@@ -98,4 +148,3 @@ public class UsuarioController {
         }
     }
 }
-

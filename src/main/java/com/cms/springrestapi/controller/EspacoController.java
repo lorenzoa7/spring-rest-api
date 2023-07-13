@@ -36,7 +36,7 @@ public class EspacoController {
     }
 
     // Obter todos os espaços
-    @Operation(summary = "Busca dados de todas os espaços", method = "GET")
+    @Operation(summary = "Busca dados de todos os espaços", method = "GET")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Busca realizada com sucesso"),
             @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),

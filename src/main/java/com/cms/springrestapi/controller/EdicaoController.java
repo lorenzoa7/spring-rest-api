@@ -50,7 +50,7 @@ public class EdicaoController {
     }
 
     // Obter detalhes de uma edicao específica
-    @Operation(summary = "Busca dados de um atividade específica", method = "GET")
+    @Operation(summary = "Busca dados de uma edição específica", method = "GET")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Busca realizada com sucesso"),
             @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),
@@ -68,7 +68,7 @@ public class EdicaoController {
     }
 
     // Criar uma nova edicao
-    @Operation(summary = "Cria uma nova atividade", method = "POST")
+    @Operation(summary = "Cria uma nova edição", method = "POST")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Uma nova edição foi criada"),
             @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),
@@ -109,7 +109,7 @@ public class EdicaoController {
     }
 
     // Atualizar detalhes parciais de uma edicao específica
-    @Operation(summary = "Atualiza detalhes parciais de uma atividade específica", method = "PATCH")
+    @Operation(summary = "Atualiza detalhes parciais de uma edição específica", method = "PATCH")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Dados atualizados com sucesso"),
             @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),
